@@ -34,6 +34,6 @@ Route::prefix('admin')
     });
 
 Route::prefix('beers')->name('beers.')->group(function () {
-    Route::get('/', [BeerController::class, 'index']);
-    Route::get('/{beer}', [BeerController::class, 'show']);
+    Route::get('/', [BeerController::class, 'index'])->name('index');
+    Route::get('/{beer}', [BeerController::class, 'show'])->name('show');
 });

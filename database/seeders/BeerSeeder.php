@@ -14,6 +14,7 @@ class BeerSeeder extends Seeder
      */
     public function run()
     {
-        Beer::factory(10)->create();
+        Beer::factory(10)
+            ->create();
     }
 }

@@ -51,5 +51,8 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         $this->tokenService->logoutAll($request);
+
+        return response()
+            ->noContent();
     }
 }

@@ -28,7 +28,7 @@ class BeerTest extends TestCase
     public function test_get_beer()
     {
         $beer = Beer::factory()->create();
-        $response = $this->get(route('beers.show', ['beer' => $beer]));
+        $response = $this->get(route('beers.show', $beer));
 
         $response->assertOk();
     }
@@ -49,7 +49,7 @@ class BeerTest extends TestCase
             'img' => $img,
         ]);
 
-        $request->assertStatus(201);
+        $request->assertCreated();
 
         $beer = Beer::first();
 
@@ -70,14 +70,14 @@ class BeerTest extends TestCase
         $desc = 'Update test desc';
         $img = UploadedFile::fake()->image('img.png');
 
-        $request = $this->postJson(route('admin.beers.update', ['beer' => $beer]), [
+        $request = $this->postJson(route('admin.beers.update', $beer), [
             'name' => $name,
             'desc' => $desc,
             'img' => $img,
             '_method' => 'put',
         ]);
 
-        $request->assertStatus(200);
+        $request->assertOk();
 
         $beer = Beer::first();
 
@@ -92,11 +92,11 @@ class BeerTest extends TestCase
 
         $beer = Beer::factory()->create();
 
-        $request = $this->postJson(route('admin.beers.destroy', ['beer' => $beer]), [
+        $request = $this->postJson(route('admin.beers.destroy', $beer), [
             '_method' => 'delete',
         ]);
 
-        $request->assertStatus(204);
+        $request->assertNoContent();
     }
 
     private function admin()
